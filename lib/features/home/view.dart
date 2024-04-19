@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:services/home/mainScreen/view.dart';
-import 'package:services/home/myAccount/view.dart';
-import 'package:services/home/phoneBook/view.dart';
-import 'package:services/home/record/view.dart';
+import 'package:services/features/home/phoneBook/view.dart';
+import 'package:services/features/home/record/view.dart';
+
+import 'mainScreen/view.dart';
+import 'myAccount/view.dart';
+
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

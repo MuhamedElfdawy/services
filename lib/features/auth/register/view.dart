@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:services/auth/login/view.dart';
-import 'package:services/auth/register/controller.dart';
-import 'package:services/design/app_Button.dart';
+
+import 'package:services/core/ui/app_Button.dart';
 import 'package:services/main.dart';
 
-import '../../design/app_input.dart';
+import '../../../core/ui/app_input.dart';
+import '../login/view.dart';
+import 'controller.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -61,13 +62,23 @@ class _RegisterState extends State<Register> {
                           width: 48.w,
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(16)
+                              borderRadius: BorderRadius.circular(16)),
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Login()));
+                            },
+                            icon: Icon(
+                              Icons.navigate_before,
+                              size: 35.sp,
+                            ),
                           ),
-                          child: IconButton(onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> const Login()));
-                          }, icon: Icon(Icons.navigate_before,size: 35.sp,)),
                         ),
-                        SizedBox(width: 80.w,),
+                        SizedBox(
+                          width: 80.w,
+                        ),
                         Center(
                           child: Text(
                             'إنشاء حساب',
@@ -99,10 +110,9 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 10.h,
                     ),
-                      AppInput(
-                       controller: usernameController,
-                         hintText: 'مثال : محمد'
-                     ),
+                    AppInput(
+                        controller: usernameController,
+                        hintText: 'مثال : محمد'),
                     SizedBox(
                       height: 16.h,
                     ),
@@ -118,10 +128,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 10.h,
                     ),
-                      AppInput(
-                       controller: null,
-                         hintText: 'مثال : جمال'
-                     ),
+                    AppInput(controller: null, hintText: 'مثال : جمال'),
                     SizedBox(
                       height: 16.h,
                     ),
@@ -137,10 +144,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 10.h,
                     ),
-                      AppInput(
-                       controller: null,
-                         hintText: 'مثال : الدقهلية'
-                     ),
+                    AppInput(controller: null, hintText: 'مثال : الدقهلية'),
                     SizedBox(
                       height: 16.h,
                     ),
@@ -156,10 +160,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 10.h,
                     ),
-                      AppInput(
-                       controller: null,
-                         hintText: 'مثال : المنصورة'
-                     ),
+                    AppInput(controller: null, hintText: 'مثال : المنصورة'),
                     SizedBox(
                       height: 16.h,
                     ),
@@ -175,10 +176,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 10.h,
                     ),
-                      AppInput(
-                       controller: null,
-                         hintText: 'مثال : سباك'
-                     ),
+                    AppInput(controller: null, hintText: 'مثال : سباك'),
                     SizedBox(
                       height: 16.h,
                     ),
@@ -194,10 +192,9 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 10.h,
                     ),
-                      AppInput(
-                       controller: emailController,
-                         hintText: 'مثال : mo@gmail.com'
-                     ),
+                    AppInput(
+                        controller: emailController,
+                        hintText: 'مثال : mo@gmail.com'),
                     SizedBox(
                       height: 16.h,
                     ),
@@ -213,8 +210,8 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 10.h,
                     ),
-                      AppInput(
-                       controller: passwordController,
+                    AppInput(
+                      controller: passwordController,
                       hintText: '********',
                       isPassword: true,
                     ),
@@ -233,8 +230,8 @@ class _RegisterState extends State<Register> {
                     SizedBox(
                       height: 10.h,
                     ),
-                      AppInput(
-                       controller: confirmpassController,
+                    AppInput(
+                      controller: confirmpassController,
                       hintText: '********',
                       isPassword: true,
                     ),
@@ -259,32 +256,50 @@ class _RegisterState extends State<Register> {
                       isSuffixIcon: true,
                     ),
                      */
-                    AppButton(onPressed: () async {
-                      final controller = RegisterController();
-                       await controller.sendData(
-                          // firstNameController.text,
-                          // lastNameController.text,
-                          emailController.text,
-                          // phoneController.text,
-                         passwordController.text,
-                           confirmpassController.text,
-                          usernameController.text
-                          // cityController.text,
-                          // governorateController.text,
-                          // factorJobController.text,
+                    AppButton(
+                        onPressed: () async {
+                          final controller = RegisterController();
+                          await controller.sendData(
+                              // firstNameController.text,
+                              // lastNameController.text,
+                              emailController.text,
+                              // phoneController.text,
+                              passwordController.text,
+                              confirmpassController.text,
+                              usernameController.text
+                              // cityController.text,
+                              // governorateController.text,
+                              // factorJobController.text,
 
-                      );
-                    },
-                      text: 'انشاء', bottomPadding: 10, topPadding: 32),
+                              );
+                        },
+                        text: 'انشاء',
+                        bottomPadding: 10,
+                        topPadding: 32),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('انا امتلك حساب',style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.normal),),
-                        TextButton(onPressed: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const Login()),);
-                        }, child: Text('تسجيل الدخول',style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.normal,color: getMyMaterialColor()),),),
+                        Text(
+                          'انا امتلك حساب',
+                          style: TextStyle(
+                              fontSize: 16.sp, fontWeight: FontWeight.normal),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Login()),
+                            );
+                          },
+                          child: Text(
+                            'تسجيل الدخول',
+                            style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.normal,
+                                color: getMyMaterialColor()),
+                          ),
+                        ),
                       ],
                     )
                   ],
@@ -297,4 +312,3 @@ class _RegisterState extends State<Register> {
     );
   }
 }
-

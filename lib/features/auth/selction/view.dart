@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:services/auth/login/view.dart';
 import 'package:services/main.dart';
+
+import '../login/view.dart';
 
 class Selction extends StatelessWidget {
   const Selction({super.key});
@@ -92,7 +93,10 @@ class MainContainer extends StatelessWidget {
 class MainButton extends StatelessWidget {
   final String name;
 
-  const MainButton({super.key, required this.name});
+  const MainButton({
+    super.key,
+    required this.name,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -103,17 +107,21 @@ class MainButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Login()),);
+              context,
+              MaterialPageRoute(builder: (context) => const Login()),
+            );
           },
           style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              side: BorderSide(
-                style: BorderStyle.solid,
-                color: getMyMaterialColor(),
-              ),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadiusDirectional.all(Radius.circular(16.r)),side: BorderSide(width: 20.w)),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            side: BorderSide(
+              style: BorderStyle.solid,
+              color: getMyMaterialColor(),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadiusDirectional.all(Radius.circular(16.r)),
+                side: BorderSide(width: 20.w)),
           ),
           child: Text(
             name,

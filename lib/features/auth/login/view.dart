@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:services/auth/login/controller.dart';
-import 'package:services/auth/register/view.dart';
-import 'package:services/design/app_Button.dart';
-import 'package:services/design/app_input.dart';
+import 'package:services/core/ui/app_Button.dart';
+import 'package:services/core/ui/app_input.dart';
+import 'package:services/features/auth/login/model/login_repository.dart';
+
 import 'package:services/main.dart';
 
+import '../register/view.dart';
+
 class Login extends StatefulWidget {
-   const Login({super.key});
+  const Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
@@ -70,10 +72,10 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 16.h,
                   ),
-                   AppInput(
+                  AppInput(
                     controller: emailController,
-                      hintText: 'مثال : mo@gmail.com',
-                      ),
+                    hintText: 'مثال : mo@gmail.com',
+                  ),
                   SizedBox(
                     height: 13.h,
                   ),
@@ -89,27 +91,29 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 16.h,
                   ),
-                   AppInput(
+                  AppInput(
                     controller: passowrdController,
                     hintText: '********',
                     isPassword: true,
                   ),
                   AppButton(
-                          onPressed: () async {
-                            var msg;
-                            final controller = LoginController();
-                            msg = await controller.sendData(phone: emailController.text, password: passowrdController.text);
+                      onPressed: () async {
+                        var msg;
+                        final model = LoginModel();
+                        msg = await model.login(
+                            email: emailController.text,
+                            password: passowrdController.text);
 
-                            print(msg);
-                            // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            //   content:  Center(child: Text(msg)),
-                            //   backgroundColor: getMyMaterialColor(),
-                            //   duration: const Duration(seconds: 1),
-                            // ));
-                          },
-                          text: 'تسجيل ',
-                          topPadding: 24,
-                          bottomPadding: 36),
+                        print(msg);
+                        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        //   content:  Center(child: Text(msg)),
+                        //   backgroundColor: getMyMaterialColor(),
+                        //   duration: const Duration(seconds: 1),
+                        // ));
+                      },
+                      text: 'تسجيل ',
+                      topPadding: 24,
+                      bottomPadding: 36),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -170,14 +174,16 @@ class _LoginState extends State<Login> {
                       Text(
                         'انا لا امتلك حساب',
                         style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.normal),
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>  const Register()));
+                                  builder: (context) => const Register()));
                         },
                         child: Text(
                           'إنشاء حساب',
@@ -244,5 +250,3 @@ class Mcontainer extends StatelessWidget {
     );
   }
 }
-
-
